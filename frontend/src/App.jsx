@@ -20,7 +20,8 @@ function App() {
     setLoading(true)
     setResult(null)
     try {
-      const response = await fetch('http://localhost:8080/query', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+      const response = await fetch(`${API_URL}/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: query })
@@ -39,7 +40,8 @@ function App() {
     setComplianceLoading(true)
     setComplianceResult(null)
     try {
-      const response = await fetch('http://localhost:8080/compliance-check', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+      const response = await fetch(`${API_URL}/compliance-check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sop_text: sopText })
