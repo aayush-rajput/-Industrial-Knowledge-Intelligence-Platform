@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+langchain
+langchain-openai
+langchain-community
+chromadb
+openai
+spacy
+PyMuPDF
+pytesseract
+python-docx
+neo4j
+sentence-transformers
+langchain-huggingface
