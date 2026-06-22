@@ -1,0 +1,10 @@
+# Force Vercel to ignore Python backend files to prevent the 5GB bundle error
+*.py
+requirements.txt
+Dockerfile
+docker-compose.yml
+__pycache__/
+venv/
+chroma_data/
+neo4j/
+neo4j.zip
