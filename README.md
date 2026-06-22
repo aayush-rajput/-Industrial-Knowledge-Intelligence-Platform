@@ -5,6 +5,65 @@ The Industrial Knowledge Intelligence Platform is a comprehensive, AI-driven sys
 
 ## Core Architecture and Features
 
+```mermaid
+graph TD
+    %% Users
+    User((User))
+    
+    %% Frontend
+    subgraph Frontend [React + Vite Frontend]
+        UI[Glassmorphism UI]
+        KQ[Knowledge Query Tab]
+        CC[Compliance Check Tab]
+        UI --> KQ
+        UI --> CC
+    end
+    
+    %% Backend APIs
+    subgraph Backend [FastAPI Backend]
+        API_Q[GET /query]
+        API_C[POST /compliance-check]
+        Agent[Local NLP Compliance Agent]
+        RAG[RAG Retrieval Engine]
+        
+        API_Q --> RAG
+        API_C --> Agent
+    end
+    
+    %% Ingestion Pipeline
+    subgraph Ingestion [Data Pipeline]
+        Docs[PDF, MD, Word Docs]
+        OCR[Tesseract OCR]
+        NER[spaCy NER]
+        Embed[HuggingFace Embeddings]
+        
+        Docs --> OCR
+        OCR --> NER
+        OCR --> Embed
+    end
+    
+    %% Databases
+    subgraph Databases [Data Storage]
+        Chroma[(ChromaDB Vector Store)]
+        Neo4j[(Neo4j Knowledge Graph)]
+    end
+    
+    %% External APIs
+    Gemini([Google Gemini 2.0 API])
+    
+    %% Connections
+    User <--> Frontend
+    KQ <--> API_Q
+    CC <--> API_C
+    
+    Embed --> Chroma
+    NER --> Neo4j
+    
+    RAG <--> Chroma
+    RAG <--> Gemini
+    Agent <--> Chroma
+```
+
 ### 1. Retrieval-Augmented Generation (RAG) Engine
 The platform features a local vector database built on ChromaDB, which stores semantic embeddings of complex industrial documents. When a user queries the system, the RAG engine retrieves the most relevant context and synthesizes it using the Google Gemini generative model to produce concise, highly accurate answers backed by source citations.
 
